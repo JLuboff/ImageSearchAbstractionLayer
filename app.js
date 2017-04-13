@@ -10,12 +10,14 @@ var app = express();
 
 app.get("/:query", function(req, res){
     let query = req.params.query;
-    console.log(query);
-var results = imgSearch(query, callback, 0 , 10);
+    let offset = req.query.offset === undefined ? 0 : req.query.offset;
+    console.log(query, offset);
+    
+    var results = imgSearch(query, callback, offset , 10);
 
-function callback(results) {
-    let arr = [];
-    results.forEach(function(el){
+    function callback(results) {
+        let arr = [];
+        results.forEach(function(el){
         let obj = {};
         obj["url"] = el.link;
         obj["snippet"] = el.snippet;
