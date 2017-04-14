@@ -14,13 +14,13 @@ app.get("/api/:query", function(req, res){
     if(err) console.log(err);
     
     let query = req.params.query;
-    let offset = req.query.offset === undefined ? 0 : req.query.offset;
+    let offset = req.query.offset === undefined || Number(req.query.offset) ===  0 ? 0 : req.query.offset;
     let time = moment().format();
     let search = {
       term: query,
       when: time
     };
-    
+
     var results = imgSearch(query, callback, offset , 10);
     
     function callback(results) {
