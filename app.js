@@ -33,6 +33,9 @@ app.get("/api/:query", function(req, res){
         obj["context"] = el.image.contextLink;
         arr.push(obj);
       });
+     res.setHeader('Content-Type', 'application/json');
+     res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
       res.send(arr);
       db.collection("recent").insert(search, function(err, data){
         if(err) throw err;
